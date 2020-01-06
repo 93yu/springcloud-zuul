@@ -1,0 +1,27 @@
+server:
+  port: 9050
+  servlet:
+    context-path: /
+spring:
+  application:
+    name: springcloud-zuul
+eureka:
+  client:
+    service-url: 
+      defaultZone: http://localhost:8089/eureka
+  instance:
+    instance-id: springcloud-zuul-9050
+    prefer-ip-address: true
+zuul:
+  #prefix: /                 #通过统一的前缀
+  #ignored-services: springcloud-user  #禁止通过的某个服务    "*"
+  #ignored-services: "*"  #禁止通过的全部服务名访问   
+  routes: 
+    user-service :     #一个服务
+      serviceId: consumer-user             #将来用户访问的服务器是多少
+      path: /userService/**                #通过浏览器访问的地址
+    account-service :    #另一个服务
+      serviceId: consumer-user             #将来用户访问的服务器是多少
+      path: /account/**
+      
+      
